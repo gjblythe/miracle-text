@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs'); 
 
 
-fs.  unlink('lyrics.txt', function (err) {
+fs.unlink('lyrics.txt', function (err) {
   if (err) throw err;
 })
 fs.writeFile('lyrics.txt', '', function (err) {
