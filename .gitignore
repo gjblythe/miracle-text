@@ -1,3 +1,5 @@
 /node_modules
+.env
+
 albumSongs.json
 lyrics.txt
