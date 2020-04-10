@@ -2,13 +2,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs'); 
 
-
-fs.unlink('lyrics.txt', function (err) {
+const fileName = 'lyrics.txt' // hook up helper
+fs.unlink(fileName, function (err) {
   if (err) throw err;
 })
-fs.writeFile('lyrics.txt', '', function (err) {
+fs.writeFile(fileName, '', function (err) {
   if (err) throw err;
-  console.log('Cleared Lyrics!');
+  console.log(`Cleared ${fileName}!`);
 });
 
 const getLyrics = async (url) => url !== undefined ? await axios.get(`https://www.lyrics.com/${url}`)
@@ -17,8 +17,8 @@ const getLyrics = async (url) => url !== undefined ? await axios.get(`https://ww
       const html = response.data;
       const $ = cheerio.load(html);
       const lyrics = $('#lyric-body-text').text();
-      fs.appendFile('lyrics.txt', lyrics,
-        (err) => console.log('lyrics done!')
+      fs.appendFile(fileName, lyrics,
+        (err) => console.log(`${fileName} done!`)
       )
     }
   }, (error) => console.log(error)) : undefined;
