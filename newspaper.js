@@ -3,7 +3,7 @@ const fs = require('fs');
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.APIKEY);
 
-const fileName = 'articles.txt'; //hook up helper
+const fileName = 'articles.json'; //hook up helper
 fs.unlink(fileName, function (err) {
   if (err) throw err;
 })
@@ -16,5 +16,10 @@ newsapi.v2.everything({
 q: 'juggalo',
 language: 'en',
 }).then(response => {
-  response.articles.map((article) => (fs.appendFile(fileName, article.content, (err) => console.log('test'))))
+  fs.appendFile(fileName, JSON.stringify(response, null, 4), (err) => console.log('test'))
+  
+  const url = [];
+
+  response.articles.map((article) => (url.push(article.url)));
+  console.log(url);
 })
